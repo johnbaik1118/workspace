@@ -1,0 +1,11 @@
+Hi, this is Jeanseong Baik. (e-mail: johnbaik1118@naver.com)
+
+This course is for first grade of cse univ. students.
+
+First, give a execution authority to 'compile.sh'.
+
+	chmod +x compile.sh
+
+and then just execute shell script.
+
+	./compile.sh
