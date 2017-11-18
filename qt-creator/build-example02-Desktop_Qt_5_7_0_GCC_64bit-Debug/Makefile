@@ -49,10 +49,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../example02/main.cpp \
-		../example02/mainwindow.cpp moc_mainwindow.cpp
+		../example02/mainwindow.cpp \
+		../example02/chart.cpp moc_mainwindow.cpp \
+		moc_chart.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		moc_mainwindow.o
+		chart.o \
+		moc_mainwindow.o \
+		moc_chart.o
 DIST          = ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/common/linux.conf \
@@ -188,6 +192,7 @@ DIST          = ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		../example02/.qmake.stash \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -205,8 +210,10 @@ DIST          = ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/exceptions.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/lex.prf \
-		../example02/example02.pro ../example02/mainwindow.h ../example02/main.cpp \
-		../example02/mainwindow.cpp
+		../example02/example02.pro ../example02/mainwindow.h \
+		../example02/chart.h ../example02/main.cpp \
+		../example02/mainwindow.cpp \
+		../example02/chart.cpp
 QMAKE_TARGET  = example02
 DESTDIR       = 
 TARGET        = example02
@@ -353,6 +360,7 @@ Makefile: ../example02/example02.pro ../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -510,6 +518,7 @@ Makefile: ../example02/example02.pro ../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf:
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf:
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf:
@@ -545,8 +554,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../example02/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../example02/main.cpp ../example02/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../example02/mainwindow.h ../example02/chart.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../example02/main.cpp ../example02/mainwindow.cpp ../example02/chart.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../example02/mainwindow.ui $(DISTDIR)/
 
 
@@ -573,9 +582,9 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_chart.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_chart.cpp
 moc_mainwindow.cpp: ../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qwidget.h \
@@ -680,30 +689,13 @@ moc_mainwindow.cpp: ../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt5.7.0/5.7/gcc_64/bin/moc
 	/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/cpslab/workspace/qt-creator/example02 -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../example02/mainwindow.h -o moc_mainwindow.cpp
 
-compiler_moc_source_make_all:
-compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
-compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../example02/mainwindow.ui \
-		../../../Qt5.7.0/5.7/gcc_64/bin/uic
-	/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/uic ../example02/mainwindow.ui -o ui_mainwindow.h
-
-compiler_yacc_decl_make_all:
-compiler_yacc_decl_clean:
-compiler_yacc_impl_make_all:
-compiler_yacc_impl_clean:
-compiler_lex_make_all:
-compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
-
-####### Compile
-
-main.o: ../example02/main.cpp ../example02/mainwindow.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qwidget.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+moc_chart.cpp: ../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChart \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractSeries \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChartGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchartglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QtGlobal \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobal.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qconfig.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfeatures.h \
@@ -726,65 +718,65 @@ main.o: ../example02/main.cpp ../example02/mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmutex.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnumeric.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractAxis \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPen \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgb.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringlist.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlist.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qalgorithms.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qarraydata.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qchar.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpair.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringbuilder.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qregexp.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvector.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrect.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qregion.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreevent.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetatype.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject_impl.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmargins.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintdevice.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrect.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpalette.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcolor.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgb.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgba64.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qbrush.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvector.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qmatrix.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpolygon.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qregion.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdatastream.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiodevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qline.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtransform.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainterpath.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qimage.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintdevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixelformat.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixmap.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qshareddata.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhash.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QFont \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfont.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfontmetrics.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfontinfo.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcursor.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qkeysequence.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvariant.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmap.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdebug.h \
@@ -792,12 +784,176 @@ main.o: ../example02/main.cpp ../example02/mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlocale.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qset.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QLegend \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qlegend.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qkeysequence.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qurl.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qurlquery.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfile.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpalette.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QBrush \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QMargins \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasictimer.h \
+		../example02/chart.h \
+		../../../Qt5.7.0/5.7/gcc_64/bin/moc
+	/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/cpslab/workspace/qt-creator/example02 -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../example02/chart.h -o moc_chart.cpp
+
+compiler_moc_source_make_all:
+compiler_moc_source_clean:
+compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_clean:
+	-$(DEL_FILE) ui_mainwindow.h
+ui_mainwindow.h: ../example02/mainwindow.ui \
+		../../../Qt5.7.0/5.7/gcc_64/bin/uic
+	/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/uic ../example02/mainwindow.ui -o ui_mainwindow.h
+
+compiler_yacc_decl_make_all:
+compiler_yacc_decl_clean:
+compiler_yacc_impl_make_all:
+compiler_yacc_impl_clean:
+compiler_lex_make_all:
+compiler_lex_clean:
+compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+
+####### Compile
+
+main.o: ../example02/main.cpp ../example02/chart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChart \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractSeries \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChartGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchartglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QtGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractAxis \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPen \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvector.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrect.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qregion.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qline.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainterpath.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qimage.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhash.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QFont \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfont.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qset.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QLegend \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qlegend.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qurl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfile.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpalette.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QBrush \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QMargins \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasictimer.h \
+		../example02/mainwindow.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qwidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfontinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcursor.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
@@ -806,7 +962,18 @@ main.o: ../example02/main.cpp ../example02/mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qeventloop.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qinputmethod.h
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChartView \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchartview.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGraphicsView \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainter.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../example02/main.cpp
 
 mainwindow.o: ../example02/mainwindow.cpp ../example02/mainwindow.h \
@@ -910,11 +1077,203 @@ mainwindow.o: ../example02/mainwindow.cpp ../example02/mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		../example02/chart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChart \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractSeries \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChartGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchartglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QtGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractAxis \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPen \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QFont \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QLegend \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qlegend.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QBrush \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QMargins \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QCoreApplication \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QFocusFrame \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qfocusframe.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QLCDNumber \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlcdnumber.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QLineEdit \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextcursor.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextformat.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QLabel \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChartView \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchartview.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGraphicsView \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainter.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDesktopWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../example02/mainwindow.cpp
+
+chart.o: ../example02/chart.cpp ../example02/chart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChart \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchart.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractSeries \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QChartGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qchartglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QtGlobal \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QAbstractAxis \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPen \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvector.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrect.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qregion.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qline.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainterpath.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qimage.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhash.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QFont \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfont.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qset.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QObject \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QLegend \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qlegend.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qurl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfile.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpalette.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QBrush \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QMargins \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QSplineSeries \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qsplineseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qlineseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QXYSeries \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qxyseries.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QList \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QPointF \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/QValueAxis \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCharts/qvalueaxis.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QTime \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QDebug
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chart.o ../example02/chart.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_chart.o: moc_chart.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_chart.o moc_chart.cpp
 
 ####### Install
 

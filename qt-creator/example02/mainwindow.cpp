@@ -1,10 +1,18 @@
 #include "mainwindow.h"
+#include "chart.h"
 #include <QCoreApplication>
 #include <QPushButton>
 #include <QFocusFrame>
 #include <QLCDNumber>
 #include <QLineEdit>
 #include <QLabel>
+#include <QtCharts/QChartView>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QtCharts/QChartView>
+#include <QMainWindow>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMainWindow>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -41,8 +49,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(dip_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     connect(dport_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
 
-
-
+    /* Spline chart */
+    Chart *chart = new Chart;
+    chart->setTitle("Source chart");
+    chart->legend()->hide();
+    chart->setAnimationOptions(QChart::AllAnimations);
+    QChartView chartView(chart);
+    chartView.setRenderHint(QPainter::Antialiasing);
+    chartView.setGeometry(QRect(QPoint(100,200),QSize(11,16)));
 }
 
 MainWindow::~MainWindow(){
