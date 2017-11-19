@@ -19,10 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     /* Migration Button */
     QPushButton *btn = new QPushButton("My Button", this);
-    // set size and location of the button
+    //set size and location of the button
     btn->setGeometry(QRect(QPoint(10,10), QSize(100,25)));
-    // connect button signal to appropriate slot
-    connect(btn, SIGNAL(released()),this,SLOT(handleButton()));
+    //connect button signal to appropriate slot
+    //connect(btn, SIGNAL(released()),this,SLOT(handleButton()));
 
     /* Display migration time */
     QLCDNumber *lcd = new QLCDNumber(5,this);
@@ -36,8 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     sip_lbl->setGeometry(10,90,120,25);
     sip_in->setGeometry(140,90,190,25);
     sport_in->setGeometry(350,90,70,25);
-    connect(sip_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    connect(sport_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    //connect(sip_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    //connect(sport_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
 
     /* QLineEdit: Destination input of IP PORT */
     QLabel *dip_lbl = new QLabel("Destination IP:", this);
@@ -46,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dip_lbl->setGeometry(710,90,160,25);
     dip_in->setGeometry(890,90,190,25);
     dport_in->setGeometry(1100,90,70,25);
-    connect(dip_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    connect(dport_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    //connect(dip_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    //connect(dport_in, SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
 
     /* Spline chart */
     Chart *chart = new Chart;
@@ -56,7 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
     chart->setAnimationOptions(QChart::AllAnimations);
     QChartView chartView(chart);
     chartView.setRenderHint(QPainter::Antialiasing);
-    chartView.setGeometry(QRect(QPoint(100,200),QSize(11,16)));
+    this->setCentralWidget(&chartView);
+    //chartView.setGeometry(QRect(QPoint(100,200),QSize(11,16)));
 }
 
 MainWindow::~MainWindow(){

@@ -1,9 +1,9 @@
 #include "chart.h"
 #include <QtCharts/QAbstractAxis>
 #include <QtCharts/QSplineSeries>
+#include <QtCharts/QValueAxis>
 #include <QtCore/QTime>
 #include <QtCore/QDebug>
-#include <QtCharts/QValueAxis>
 
 Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     QChart(QChart::ChartTypeCartesian, parent, wFlags),
