@@ -1,4 +1,4 @@
 virt-clone \
        --original vmone \
        --name vmtwo \
-       --file /home/cpslab/Documents/workspace/virt/vmtwo.qcow2
+       --file /home/dsc/cpslab/vm-image/vmtwo.qcow2
