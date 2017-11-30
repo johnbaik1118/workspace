@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../14_QProgressBar -I. -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../14_QProgressBar -I. -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCharts -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/cpslab/Qt5.7.0/5.7/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = QProgressBar1.0.0
 DISTDIR = /home/cpslab/workspace/qt-creator/3└х/1_BasicWidget/Error\ in\ "\ Util.asciify("build-QProgressBar-Desktop_Qt_5_7_0_GCC_64bit-Debug")":\ TypeError:\ Property\ 'asciify'\ of\ object\ Core::Internal::UtilsJsExtension(0x7b6670)\ is\ not\ a\ function/.tmp/QProgressBar1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/cpslab/Qt5.7.0/5.7/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/cpslab/Qt5.7.0/5.7/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/cpslab/Qt5.7.0/5.7/gcc_64/lib -lQt5Charts -L/usr/lib64 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -188,6 +188,7 @@ DIST          = /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		../14_QProgressBar/.qmake.stash \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -353,6 +354,7 @@ Makefile: ../14_QProgressBar/QProgressBar.pro /home/cpslab/Qt5.7.0/5.7/gcc_64/mk
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -371,6 +373,7 @@ Makefile: ../14_QProgressBar/QProgressBar.pro /home/cpslab/Qt5.7.0/5.7/gcc_64/mk
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/yacc.prf \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/lex.prf \
 		../14_QProgressBar/QProgressBar.pro \
+		/home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Charts.prl \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Widgets.prl \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Gui.prl \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Core.prl
@@ -510,6 +513,7 @@ Makefile: ../14_QProgressBar/QProgressBar.pro /home/cpslab/Qt5.7.0/5.7/gcc_64/mk
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/qt_config.prf:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/default_pre.prf:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/resolve_config.prf:
@@ -528,6 +532,7 @@ Makefile: ../14_QProgressBar/QProgressBar.pro /home/cpslab/Qt5.7.0/5.7/gcc_64/mk
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/yacc.prf:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/features/lex.prf:
 ../14_QProgressBar/QProgressBar.pro:
+/home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Charts.prl:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Widgets.prl:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Gui.prl:
 /home/cpslab/Qt5.7.0/5.7/gcc_64/lib/libQt5Core.prl:
@@ -676,7 +681,7 @@ moc_widget.cpp: /home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets/QProgressBar \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
 		../14_QProgressBar/widget.h \
 		/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/moc
-	/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/cpslab/workspace/qt-creator/3└х/1_BasicWidget/14_QProgressBar -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../14_QProgressBar/widget.h -o moc_widget.cpp
+	/home/cpslab/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/cpslab/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/cpslab/workspace/qt-creator/3└х/1_BasicWidget/14_QProgressBar -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCharts -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/cpslab/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../14_QProgressBar/widget.h -o moc_widget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

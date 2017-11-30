@@ -1,9 +1,9 @@
-QT       += core gui
+QT       += core gui charts
 
 TARGET = QProgressBar
 TEMPLATE = app
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets charts
 
 
 SOURCES += main.cpp\
