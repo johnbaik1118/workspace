@@ -29,18 +29,22 @@ int main(int argc, char *argv[]) {
 	addrCriteria.ai_socktype = SOCK_DGRAM;		// 데이터그램 소켓만 반환
 	addrCriteria.ai_protocol = IPPROTO_UDP;		// TCP만 반환
 
+	for(;;){
 	// 주소(들) 획득
 	struct addrinfo *servAddr;			// 서버 주소의 리스트
+	printf("get serve address()\n");
 	int rtnVal = getaddrinfo(server, servPort, &addrCriteria, &servAddr);
 	if (rtnVal != 0)
 		DieWithUserMessage("getaddrinfo() failed", gai_strerror(rtnVal));
+	printf("got serve address\n");
 
 	// 데이터그램/UDP 소켓 생성
+	printf("socket create()\n");
 	int sock = socket(servAddr->ai_family, servAddr->ai_socktype,
 		servAddr->ai_protocol);			// 클라이언트 소켓 식별자
 	if (sock < 0)
 		DieWithSystemMessage("socket() failed");
-		
+	printf("socket created()\n");
 	// 문자열을 서버로 전송
 	ssize_t numBytes = sendto(sock, echoString, echoStringLen, 0,
 		servAddr->ai_addr, servAddr->ai_addrlen);
@@ -51,12 +55,14 @@ int main(int argc, char *argv[]) {
 	
 	// 응답을 수신
 
+	printf("wait for response()\n");
 	struct sockaddr_storage fromAddr;		// 서버의 주소
 	// 원격지 주소를 저장할 구조체의 길이 설정(입출력 파라미터)
 	socklen_t fromAddrLen = sizeof(fromAddr);
 	char buffer[MAXSTRINGLENGTH + 1];		// 입출력 버퍼
 	numBytes = recvfrom(sock, buffer, MAXSTRINGLENGTH, 0,
 		(struct sockaddr *) &fromAddr, &fromAddrLen);
+	printf("recieve from()\n");
 	if (numBytes < 0)
 		DieWithSystemMessage("recvfrom() failed");
 	else if (numBytes != echoStringLen)
@@ -66,11 +72,11 @@ int main(int argc, char *argv[]) {
 	if (!SockAddrsEqual(servAddr->ai_addr, (struct sockaddr *) &fromAddr))
 		DieWithUserMessage("recvfrom()", "received a packet from unknown source");
 
-	freeaddrinfo(servAddr);
-
 	buffer[echoStringLen] = '\0';		// 수신한 데이터에 null 추가
 	printf("Received: %s\n", buffer);	// 수신한 에코 문자열을 출력
 	
+	freeaddrinfo(servAddr);
 	close(sock);
+	}
 	exit(0);
 }
