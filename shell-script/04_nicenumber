@@ -1,0 +1,32 @@
+#!/bin/sh
+
+nicenumber()
+{
+	integer=$(echo $1 | cut -d. -f1)
+	decimal=$(echo $1 | cut -d. -f2)
+	
+	if [ $decimal != $1 ] ; then
+		result="${DD:="."}$decimal"
+	fi
+
+	thousands=$integer
+
+	while [ $thousands -gt 999 ]; do
+		remainder=$(($thousands % 1000))
+		
+		while [ ${#remainder} -lt 3 ] ; do
+			remainder="0$remainder"
+		done
+		
+		thousands=$(($thousands / 1000))
+
+		result="${TD:=","}${remainder}${result}"
+	done
+	
+	nicenum="${thousands}${results}"
+	if [ ! -z $2 ] ; then
+		echo $nicenum
+	fi
+}
+
+
