@@ -1,0 +1,12 @@
+#!/bin/sh
+
+function validint
+{
+	number="$1";	min="$2";	max="$3"
+
+	if [ -z $number ] ; then
+		echo "You didn't enter anything. Unacceptable." >&2 ; return 1
+	fi
+
+	if [
+

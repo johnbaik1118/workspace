@@ -22,4 +22,47 @@ scrambleword()
 	done
 }
 	
+if [ ! -r $wordlib ] ; then
+	echo "$0: Missing word library $wordlib" >&2
+	echo "(online: http://www.intuitive.com/wicked/examples/long-words.txt" >&2
+	echo "save the file as $wordlib and you're ready to play!)" >&2
+	exit 1
+fi
 
+newgame=""; guesses=0; correct=0; total=0
+
+until [ "$guess" = "quit" ] ; do
+	
+	scrambleword
+
+	echo ""
+	echo "You nedd to unscramble: $scrambled"
+
+	guess="??" ; guesses=0
+	total=$(( $total + 1))
+
+	while [ "$guess" != "$match" -a "$guess" != "quit" -a "$guess" != "next" ]
+		do
+		echo ""
+		echo -n "Your guess (quit|next) : "
+		read guess
+
+		if [ "$guess" = "$match" ] ; then
+			guesses=$(( $guesses + 1 ))
+			echo ""
+			echo "*** You got it with tries = ${guesses}! Well done!! ***"
+			echo ""
+			correct=$(( $correct + 1 ))
+
+		elif [ "$guess" = "next" -o "$quess" = "quit" ] ; then
+			echo  "The unscrambled word was \"$match\". Your tries: $guesses"
+		else
+			echo "Nope. That's not the unscrambled word. Try again."
+			guesses=$(( $guesses + 1 ))
+		fi
+	done
+done
+
+echo "Done. You correctly figured out $correct out of $total scrambled words."
+
+exit 0
