@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /*
  *  Made by Jeanseong Baik. 
  *  jsbaik@hanyang.ac.kr
@@ -7,6 +5,8 @@
  *  WARNING: USE ONLY FOR HANYANG UNIV. CLASS SYSTEM PROGRAMMING INTRODUCTION.
  *           OTHER COMMERCIAL OR EDUCATIONAL PURPOSES ARE NOT ALLOWED.
  */
+
+#include <stdio.h>
 
 #define SPADE   "\xE2\x99\xA0"
 #define CLUB    "\xE2\x99\xA3"
@@ -30,29 +30,18 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
-int main (void)
-{
-	printf(
-		BOLDMAGENTA
-		"┏━━━━━┓\n"
-		"┃"SPADE"    ┃\n"
-		"┃  K  ┃\n"
-		"┃    "SPADE"┃\n"
-		"┗━━━━━┛\n"
-		RESET
-     	);
-		
-	printf(
-		BOLDRED
-		"┏━━━━━┓\n"
-		"┃"HEART"    ┃\n"
-		"┃  6  ┃\n"
-		"┃    "HEART"┃\n"
-		"┗━━━━━┛\n"
-		RESET
-	);
+typedef struct card{
+	int pips;
+	char suit;
+}card;
 
-	return 0;
-}
+typedef struct player {
+	int account;
+	card* c1;
+	card* c2;
+}player;
 
-
+void print_card(card*);
+void print_deck(player*);
+void print_chips(player*);
+void print_game();
