@@ -20,19 +20,20 @@
 
 /* function to complete */
 Card* newcard(int _pips,char _suit){
-	Card* card = (Card*)malloc(sizeof(Card));
-	card->pips = _pips;
-	card->suit = _suit;
-	card->flipped = 0;
-	card->next = NULL;
+	
+	/* use malloc to assign memory 
+	 * initialize its components
+	 */
+ 
 	return card;	
 }
 	
 Deck* newdeck(){
-	Deck* deck = (Deck*)malloc(sizeof(Deck));
-	deck->top=NULL;
-	deck->size=0;
 
+	/* use malloc to assign memory 
+	 * initialize its components
+	 */
+ 
 	Card* cursor;	
 	for(char s = 0; s <= 3; s++) {
 		for(int p = 2; p <= 14; p++) {
@@ -49,11 +50,11 @@ Deck* newdeck(){
 }
 
 Player* newplayer(char* _name,int _account){
-	Player* player = (Player*)malloc(sizeof(Player));
-	player->name = _name;
-	player->c1 = NULL;
-	player->c2 = NULL;
-	player->account = _account;
+	
+	/* use malloc to assign memory 
+	 * initialize its components
+	 */
+ 
 	return player;
 }
 
@@ -122,5 +123,9 @@ void shuffle(Deck* deck){
 }
 
 void freedeck(Deck* deck){  	/* malloc을 해줬던 메모리 영역들에 대하여 free()를 하지 않으면 메모리 문제가 발생하여 런타임 에러가 날 수 있다. */
+	free(deck);
+
+	/* 이것만으로는 불충분하다. */
+
 	return;
 }
