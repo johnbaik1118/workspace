@@ -2,6 +2,17 @@
 
 void print_card(Card* _card)
 {
+	if(_card->flipped == 0) {
+		printf(
+			BOLDGREEN"┏━━━━━┓\n"
+			"┃ ◈ ◈ ┃\n"
+			"┃ ◈ ◈ ┃\n"
+			"┃ ◈ ◈ ┃\n"
+			"┗━━━━━┛"RESET"\n"
+		);
+		return;
+	}
+
 	/************************************/
 	int pips 	= _card->pips;
 	char suit 	= _card->suit;

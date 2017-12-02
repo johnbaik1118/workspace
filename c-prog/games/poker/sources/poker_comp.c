@@ -70,43 +70,54 @@ Card* eject(Deck* deck) {
 }
 
 void shuffle(Deck* deck){
-	Deck* temp = (Deck*)malloc(sizeof(Deck));	/* 분리하는 섞음 카드 뭉치를 임시 저장하는 공간이다. */
+	Deck* head = (Deck*)malloc(sizeof(Deck));	/* 분리하는 섞음 카드 뭉치를 임시 저장하는 공간이다. */
+	Deck* mid = (Deck*)malloc(sizeof(Deck));
+	Deck* tail = (Deck*)malloc(sizeof(Deck));
 
 	srand(clock()); 	/* time(NULL) 보다 훨씬 빠른 주기로 시드를 변경한다. 프로그램이 실행된 이후 얼만큼의 cpu clock tick이 경과했는지 측정한다. */
-
-	unsigned char index = rand()%(deck->size);
+	if(deck->size<=20) printf("\n\nERROR: deck size should be bigger than 20\n\n");
+	unsigned char index = rand()%(deck->size-20)+10;
+	unsigned char endex = rand()%(deck->size - index-1)+1;
 	
-	Card *cursor_a, *cursor_b, *cursor_c;
-	cursor_a = deck->top;
+	Card *cindex, *cendex, *aendex, *bendex;
+	cendex = deck->top;
 	for(int i = 0; i < index-1; i++) {
-		cursor_a = cursor_a->next;
+		cendex = cendex->next;
 	}
-	cursor_c = cursor_a;
-	cursor_a = cursor_a->next;
-	cursor_c->next = NULL;
-	cursor_b = cursor_a;
-	while(cursor_b->next != NULL) cursor_b = cursor_b->next;
-	cursor_b->next = deck->top;
-	deck->top = cursor_a;
+	/* 헤드 덱이 생성된다. */
+	head->top = deck->top;
+	head->size = index-1;
+	cindex = cendex->next;
+	cendex->next = NULL;
+	aendex = cendex;
+	cendex = cindex;
 	
-	/*
-	unsigned char endex = rand()%(deck->size - index);
-	printf("shuffle index: %u, endex: %u\n",index,endex);
-		
-	Card* cursor = deck->top;
-	Card* sep_a = 
-	for(int i = 0; i < index; i++) { 		// 섞음 뭉치를 분리할 index를 찾아간다. 
-		cursor = cursor->next;
+	for(int i = 0; i < endex-1; i++) {
+		cendex = cendex->next;
 	}
-	Card* sep_a = 
-	temp->top = cursor;
-	for(int i = 0; i < endex; i++) {		// 섞음 카드 뭉치를 분리할 endex를 찾아간다.
-		cursor = cursor->next;
-	}
-	*/
-	
 
-	free(temp); 		
+	/* 미드 덱이 생성된다. */
+	mid->top = cindex;
+	mid->size = endex-1;
+	cindex = cendex->next;
+	cendex->next = NULL;
+	bendex = cendex;
+	cendex = cindex;
+
+	for(int i =0; i < (deck->size - index - endex-1); i++) {
+		cendex = cendex->next;
+	}
+	cendex->next = NULL;
+	
+	/* 테일 덱이 생성된다. */
+	tail->top = cindex;
+	tail->size = (deck->size - index - endex);	
+	
+	deck->top = mid->top;
+	aendex->next = tail->top;
+	bendex->next = head->top;
+
+	free(head); free(mid); free(tail); 		
 	return;
 }
 
