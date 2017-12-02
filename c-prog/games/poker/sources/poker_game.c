@@ -1,13 +1,13 @@
 #include "../headers/poker.h"
-#include <stdio.h>
-#include <unistd.h>
 
 int main(int argc, char** argv)
 {
-	for(;;) {
-		system("clear");
-		print_game();
-		usleep(100000);
+	Deck* deck = newdeck();
+	for(int i=0; i < 100000; i++) {
+		shuffle(deck);
+		print_deck(deck);
+		printf("==============================================\n");
 	}
+	
 	return 0;
 }

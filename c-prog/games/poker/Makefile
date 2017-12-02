@@ -1,10 +1,13 @@
 CC=gcc
 CFLAGS=-I.
 DEPS = ./headers/*
-OBJ = poker_print.o poker_game.o
+OBJ = poker_print.o poker_game.o poker_comp.o
 
 %.o: ./sources/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -g -c -o $@ $< $(CFLAGS)
 
 poker: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -g -o $@ $^ $(CFLAGS)
+
+clean:
+	rm *.o poker
