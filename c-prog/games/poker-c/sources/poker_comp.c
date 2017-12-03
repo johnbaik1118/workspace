@@ -13,27 +13,21 @@
  *  	4) eject(): only can pop out from the top of the Deck 
  *		    (pop from the bottom is not allowed) 
  *
- *	5) inject(): push a card at the bottom of the Deck
- *
- *	6) shuffle(-): use srand/rand
+ *	5) shuffle(-): use srand/rand
  */
 
 /* function to complete */
 Card* newcard(int _pips,char _suit){
 	
-	/* use malloc to assign memory 
-	 * initialize its components
-	 */
- 
+	/* write codes */	
+
 	return card;	
 }
 	
 Deck* newdeck(){
+	
+	/* write codes */	
 
-	/* use malloc to assign memory 
-	 * initialize its components
-	 */
- 
 	Card* cursor;	
 	for(char s = 0; s <= 3; s++) {
 		for(int p = 2; p <= 14; p++) {
@@ -51,21 +45,16 @@ Deck* newdeck(){
 
 Player* newplayer(char* _name,int _account){
 	
-	/* use malloc to assign memory 
-	 * initialize its components
-	 */
- 
+	/* write codes */	
+	
 	return player;
 }
 
 Card* eject(Deck* deck) {
-	Card* temp = deck->top;
-	if(deck->top == NULL){
-		printf("error failed!\n");
-		return temp;
-	}
-	deck->top = deck->top->next;
-	deck->size--;
+	Card* temp;
+
+	/* write codes */	
+
 	return temp;
 }
 
@@ -123,9 +112,8 @@ void shuffle(Deck* deck){
 }
 
 void freedeck(Deck* deck){  	/* malloc을 해줬던 메모리 영역들에 대하여 free()를 하지 않으면 메모리 문제가 발생하여 런타임 에러가 날 수 있다. */
-	free(deck);
 
-	/* 이것만으로는 불충분하다. */
+	/* write codes */	
 
 	return;
 }

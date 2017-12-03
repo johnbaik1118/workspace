@@ -1,4 +1,5 @@
 #include <time.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -32,7 +33,7 @@
  *  Card has 
  *	1) integer of pips 
  *	2) character of suit 
- *	3) bool of flipped or not
+ *	3) bool of flipped or not  (type _Bool)
  * 	4) pointer which points next card
  *
  *  Deck has
@@ -41,58 +42,30 @@
  * 	
  *  Player has
  *	1) string name
- *	2) pointer of a Deck
+ *	2) pointer of card one
+ *	3) pointer of card two
  *	3) int account
- *
- *  Functions to create
- *  
- *	1) newcard(-,-): Use malloc
- *
- *	2) newdeck(): Use malloc 
- *	
- * 	3) newplayer(): Use malloc
- *
- *  	4) eject(): only can pop out from the top of the Deck 
- *		    (pop from the bottom is not allowed) 
- *
- *	5) inject(): push a card at the bottom of the Deck
- *
- *	6) shuffle(-): use srand/rand
  */
 
 /* typedef structs to define */
-typedef struct Card{
-	int pips;
-	char suit;
-	_Bool flipped;
-	struct Card *next;
-}Card;
 
-typedef struct Deck{
-	Card *top;
-	int size;
-}Deck;
 
-typedef struct Player {
-	char* name;
-	Card* c1;
-	Card* c2;
-	int account;
-}Player;
+	/* Define typedef here */
+
 
 /* function to complete -----> work in ../sources/poker_comp.c */
 Card* newcard(int,char);
 Deck* newdeck();
 Player* newplayer(char*,int);
 Card* eject(Deck*);
-void inject(Deck*,Card*);
+
+/* given functions */
 void shuffle(Deck*);
 
 /* print functions */
 void print_card(Card*);
 void print_deck(Deck*);
-void print_game();
 
 /* Calculation of scores */
-int cal_scores(Deck*,Deck*);
+void print_score(Player*, Card*[5]);
 
