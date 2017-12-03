@@ -1,4 +1,5 @@
 #include <time.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -94,5 +95,5 @@ void print_deck(Deck*);
 void print_game();
 
 /* Calculation of scores */
-int cal_scores(Deck*,Deck*);
+void print_score(Player*, Card*[5]);
 
