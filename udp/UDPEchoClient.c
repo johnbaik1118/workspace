@@ -32,11 +32,11 @@ int main(int argc, char *argv[]) {
 	for(;;){
 	// 주소(들) 획득
 	struct addrinfo *servAddr;			// 서버 주소의 리스트
-	printf("get serve address()\n");
+	printf("get server address()\n");
 	int rtnVal = getaddrinfo(server, servPort, &addrCriteria, &servAddr);
 	if (rtnVal != 0)
 		DieWithUserMessage("getaddrinfo() failed", gai_strerror(rtnVal));
-	printf("got serve address\n");
+	printf("got server address\n");
 
 	// 데이터그램/UDP 소켓 생성
 	printf("socket create()\n");
