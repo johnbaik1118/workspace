@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 		DieWithUserMessage("sendto() error", "sent unexpected number of bytes");
 	
 	// 응답을 수신
-
+/*
 	printf("wait for response()\n");
 	struct sockaddr_storage fromAddr;		// 서버의 주소
 	// 원격지 주소를 저장할 구조체의 길이 설정(입출력 파라미터)
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
 
 	buffer[echoStringLen] = '\0';		// 수신한 데이터에 null 추가
 	printf("Received: %s\n", buffer);	// 수신한 에코 문자열을 출력
-	
+*/	
 	freeaddrinfo(servAddr);
 	close(sock);
 	}

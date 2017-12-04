@@ -48,10 +48,11 @@ int main(int argc, char *argv[])
 		fputs("Handling client ", stdout);
 		PrintSocketAddress((struct sockaddr *) &clntAddr, stdout);
 		fputc('\n',stdout);
-	
+	/*
 		// 수신 데이터그램을 클라이언트에게 돌려 보냄
 		ssize_t numBytesSent = sendto(sock, buffer, numBytesRcvd, 0, (struct sockaddr *) &clntAddr, sizeof(clntAddr));
 		if(numBytesSent < 0 ) DieWithSystemMessage("sendto() failed");
 		else if(numBytesSent != numBytesRcvd) DieWithUserMessage("sendto()", "sent unexpected number of bytes");
+	*/
 	}
 }
