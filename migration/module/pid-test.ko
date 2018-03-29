@@ -1,0 +1,37 @@
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/sched.h>
+
+MODULE_LICENSE("GPL");
+
+static int npid = 1;
+module_param(npid, int, 0644);
+
+static int mod_init(void)
+{
+	int i, error = 0;
+	struct task_struct *p;
+	struct pid * pid;
+
+	rcu_read_lock();
+	pid = find_get_pid(npid);
+	p = pid_task(pid, PIDTYPE_PID);
+	if (!p) {
+		error = -EINVAL;
+		goto out;
+	}
+	printk("%s: pid level = %u\n", p->comm, pid->level);
+	for (i = 0; i <= pid->level; i++)
+		printk("[%d] %d\n", i, pid->numbers[i].nr);
+out:
+	put_pid(pid);
+	rcu_read_unlock();
+	return error;
+}
+
+static void mod_exit(void) 
+{
+}
+
+module_init(mod_init);
+module_exit(mod_exit);
