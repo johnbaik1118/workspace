@@ -1912,7 +1912,7 @@ extern int getloadavg (double __loadavg[], int __nelem)
 # 4 "patch.c"
 int main(void) {
  for(;;) {
-  printf("Algorithm B\n");
+  putchar('B');
  }
  return 0;
 }

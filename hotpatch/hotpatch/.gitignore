@@ -1,0 +1,10 @@
+*.swp
+build
+tags
+TAGS
+TODO
+todo
+Debug
+Release
+*.tgz
+*.tar.gz

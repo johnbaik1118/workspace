@@ -1,7 +1,4 @@
 	.file	"patch.c"
-	.section	.rodata
-.LC0:
-	.string	"Algorithm B"
 	.text
 	.globl	main
 	.type	main, @function
@@ -14,8 +11,8 @@ main:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 .L2:
-	movl	$.LC0, %edi
-	call	puts
+	movl	$66, %edi
+	call	putchar
 	jmp	.L2
 	.cfi_endproc
 .LFE2:
