@@ -1,7 +1,7 @@
-	.file	"target.c"
+	.file	"patch.c"
 	.section	.rodata
 .LC0:
-	.string	"Algorithm A"
+	.string	"Algorithm B"
 	.text
 	.globl	main
 	.type	main, @function

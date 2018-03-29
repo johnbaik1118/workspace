@@ -3,7 +3,7 @@
 
 int main(void) {
 	for(;;)	{
-		printf("Algorithm A\n");
+		printf("Algorithm B\n");
 	}
 	return 0;
 }

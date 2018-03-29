@@ -49,20 +49,16 @@ int main(int argc, char *argv[])
 
   kn = atoi(argv[4]);						// 공유메모리 접근번호인데, 사용자가 임의로 지정한다. 지금의 경우는 pid + 1.
   printf("%d\n", kn);
-  if ( -1 == ( shm_id = shmget( (key_t)kn, MEM_SIZE, IPC_CREAT|0777)))	//  IPC_CREAT: 커널 안에 존재하지 않는다면 세그먼트를 만든다.
-      {
+  if ( -1 == ( shm_id = shmget( (key_t)kn, MEM_SIZE, IPC_CREAT|0777))) {	//  IPC_CREAT: 커널 안에 존재하지 않는다면 세그먼트를 만든다.
       printf( "공유 메모리 생성 실패\n");
       return -1;
-    }
-
-  if ( ( void *)-1 == ( shm_addr = shmat( shm_id, ( void *)0, 0)))	//  공유메모리를 사용하는 방법. 이 함수를 사용하면 함수 내에서 사용할 수 있는 주소를 반환해준다.
-    {
+  }
+  if ( ( void *)-1 == ( shm_addr = shmat( shm_id, ( void *)0, 0))) {		//  공유메모리를 사용하는 방법. 이 함수를 사용하면 함수 내에서 사용할 수 있는 주소를 반환해준다.
       printf( "공유 메모리 첨부 실패\n");
       return -1;
-    }
-  
+  } 
   child = atoi(argv[1]);					//  타켓 어플리케이션의 pid
-  target_addr = strtol(argv[2], NULL, 0);			//  핫패칭 트렘플린 코드를 삽입하려는 타겟 함수의 주소
+  target_addr = strtol(argv[2], NULL, 0);			//  핫패칭 트렘플린 코드를 삽입하려는 타겟 함수의 주소    
 
   seize_process(child);						//  해당 어플리케이션의 권한을 가져온다. 모든 Thread의 메모리 공간 접근 및 수정 가능
   f_shared_memory(child, shm_id);				//  타겟 어플리케이션에 공유메모리를 강제로 삽입
