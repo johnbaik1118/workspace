@@ -11,27 +11,34 @@ static time_t prev_time = 0;
 
 void print_current_time_with_ms (void)
 {
-    long            ms; // Milliseconds
-    time_t          s;  // Seconds
-    struct timespec spec;
+	long            ms; // Milliseconds
+	time_t          s;  // Seconds
+	struct timespec spec;
 
-    clock_gettime(CLOCK_REALTIME, &spec);
+	clock_gettime(CLOCK_REALTIME, &spec);
 
-    s  = spec.tv_sec;
-    ms = round(spec.tv_nsec / 1.0e6); // Convert nanoseconds to milliseconds
-    if (ms > 999) {
-        s++;
-        ms = 0;
-    }
+	s  = spec.tv_sec;
+	ms = round(spec.tv_nsec / 1.0e6); // Convert nanoseconds to milliseconds
+	if (ms > 999) {
+	s++;
+	ms = 0;
+	}
 
-    printf("Current time: %"PRIdMAX".%03ld seconds since the Epoch\n",
-           (intmax_t)s, ms);
-}
+	printf("Current time: %"PRIdMAX".%03ld seconds since the Epoch\n",
+	   (intmax_t)s, ms);
+	}
 
 int breathe(void)
 {
-	time_t curr_time = time(NULL);
-	if(prev_time == 0) prev_time = curr_time;
+	long            ms; // Milliseconds
+	time_t          s;  // Seconds
+	struct timespec spec;
+	clock_gettime(CLOCK_REALTIME, &spec);
+
+
+	time 
+	//time_t curr_time = time(NULL);
+	//if(prev_time == 0) prev_time = curr_time;
 	int diff = curr_time - prev_time;
 	printf("curr : %ld\nprev : %ld\ndiff : %d\n", curr_time, prev_time, diff);
 	prev_time = curr_time;
