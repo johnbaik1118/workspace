@@ -63,10 +63,10 @@
 
 /* typedef structs to define */
 typedef struct Card{
-	int pips;
-	char suit;
-	_Bool flipped;
-	struct Card *next;
+	char suit;		// 1 Bytes
+	_Bool flipped;		// 1 Bytes
+	int pips; 		// 4 Bytes
+	struct Card *next;	// (In 64-bit) 8 Bytes
 }Card;
 
 typedef struct Deck{
