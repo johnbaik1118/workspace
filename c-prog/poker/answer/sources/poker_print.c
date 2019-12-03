@@ -5,11 +5,11 @@ void print_card(Card* _card)
 	if(_card->flipped == 0) {
 		printf(
 			BOLDGREEN
-			"┏━━━━━┓\n"
-			"┃ ◈ ◈ ┃\n"
-			"┃ ◈ ◈ ┃\n"
-			"┃ ◈ ◈ ┃\n"
-			"┗━━━━━┛"RESET"\n"
+			"┏━━━━━━━┓\n"
+			"┃  ◈ ◈  ┃\n"
+			"┃  ◈ ◈  ┃\n"
+			"┃  ◈ ◈  ┃\n"
+			"┗━━━━━━━┛"RESET"\n"
 		);
 		return;
 	}
@@ -60,11 +60,11 @@ void print_card(Card* _card)
 	}
 	/************************************/
 	printf(
-		"%s┏━━━━━┓\n"
-		  "┃%s    ┃\n"
-	 	  "┃  %c  ┃\n"
-		  "┃    %s┃\n"
-		  "┗━━━━━┛"RESET"\n",
+		"%s┏━━━━━━━┓\n"
+		  "┃%s      ┃\n"
+	 	  "┃   %c   ┃\n"
+		  "┃     %s ┃\n"
+		  "┗━━━━━━━┛"RESET"\n",
 		color,shape,pips_printformat,shape
 	);
 	return;

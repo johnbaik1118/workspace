@@ -59,8 +59,5 @@ int main(int argc, char** argv)
 	enter = getchar();
 	print_score(player, card);
 
-	
-	
-
 	return 0;
 }

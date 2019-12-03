@@ -1,0 +1,57 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BLACK	headers/poker.h	11;"	d
+BLUE	headers/poker.h	15;"	d
+BOLDBLACK	headers/poker.h	19;"	d
+BOLDBLUE	headers/poker.h	23;"	d
+BOLDCYAN	headers/poker.h	25;"	d
+BOLDGREEN	headers/poker.h	21;"	d
+BOLDMAGENTA	headers/poker.h	24;"	d
+BOLDRED	headers/poker.h	20;"	d
+BOLDWHITE	headers/poker.h	26;"	d
+BOLDYELLOW	headers/poker.h	22;"	d
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-I.$/;"	m
+CLUB	headers/poker.h	7;"	d
+CYAN	headers/poker.h	17;"	d
+Card	headers/poker.h	/^typedef struct Card{$/;"	s
+Card	headers/poker.h	/^}Card;$/;"	t	typeref:struct:Card
+DEPS	Makefile	/^DEPS = .\/headers\/*$/;"	m
+DIAMOND	headers/poker.h	9;"	d
+Deck	headers/poker.h	/^typedef struct Deck{$/;"	s
+Deck	headers/poker.h	/^}Deck;$/;"	t	typeref:struct:Deck
+GREEN	headers/poker.h	13;"	d
+HEART	headers/poker.h	8;"	d
+MAGENTA	headers/poker.h	16;"	d
+OBJ	Makefile	/^OBJ = poker_print.o poker_game.o poker_comp.o$/;"	m
+Player	headers/poker.h	/^typedef struct Player {$/;"	s
+Player	headers/poker.h	/^}Player;$/;"	t	typeref:struct:Player
+RED	headers/poker.h	12;"	d
+RESET	headers/poker.h	10;"	d
+SPADE	headers/poker.h	6;"	d
+WHITE	headers/poker.h	18;"	d
+YELLOW	headers/poker.h	14;"	d
+account	headers/poker.h	/^	int account;$/;"	m	struct:Player
+c1	headers/poker.h	/^	Card* c1;$/;"	m	struct:Player
+c2	headers/poker.h	/^	Card* c2;$/;"	m	struct:Player
+eject	sources/poker_comp.c	/^Card* eject(Deck* deck) {$/;"	f
+flipped	headers/poker.h	/^	_Bool flipped;$/;"	m	struct:Card
+freedeck	sources/poker_comp.c	/^void freedeck(Deck* deck){  	\/* malloc을 해줬던 메모리 영역들에 대하여 free()를 하지 않으면 메모리 문제가 발생하여 런타임 에러가 날 수 있다. *\/$/;"	f
+main	sources/poker_game.c	/^int main(int argc, char** argv)$/;"	f
+name	headers/poker.h	/^	char* name;$/;"	m	struct:Player
+newcard	sources/poker_comp.c	/^Card* newcard(int _pips,char _suit){$/;"	f
+newdeck	sources/poker_comp.c	/^Deck* newdeck(){$/;"	f
+newplayer	sources/poker_comp.c	/^Player* newplayer(char* _name,int _account){$/;"	f
+next	headers/poker.h	/^	struct Card *next;$/;"	m	struct:Card	typeref:struct:Card::Card
+pips	headers/poker.h	/^	int pips;$/;"	m	struct:Card
+print_card	sources/poker_print.c	/^void print_card(Card* _card)$/;"	f
+print_deck	sources/poker_print.c	/^void print_deck(Deck* deck) {$/;"	f
+print_score	sources/poker_print.c	/^void print_score(Player* player, Card* card[5]){$/;"	f
+shuffle	sources/poker_comp.c	/^void shuffle(Deck* deck){$/;"	f
+size	headers/poker.h	/^	int size;$/;"	m	struct:Deck
+suit	headers/poker.h	/^	char suit;$/;"	m	struct:Card
+top	headers/poker.h	/^	Card *top;$/;"	m	struct:Deck
