@@ -8,6 +8,12 @@
 // int     4 bytes 
 // double    8 bytes 
 
+typedef struct node
+{
+  int data;
+  struct node * next;
+} NODE;
+
 // structure A 
 typedef struct structa_tag
 {
@@ -41,6 +47,7 @@ typedef struct structd_tag
 
 int main ()
 {
+  printf ("sizeof(NODE) = %ld\n", sizeof (NODE));
   printf ("sizeof(structa_t) = %ld\n", sizeof (structa_t));
   printf ("sizeof(structb_t) = %ld\n", sizeof (structb_t));
   printf ("sizeof(structc_t) = %ld\n", sizeof (structc_t));
