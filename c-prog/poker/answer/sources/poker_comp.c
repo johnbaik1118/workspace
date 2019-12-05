@@ -10,17 +10,17 @@
  *	
  * 	3) newplayer(): Use malloc
  *
- *  	4) eject(): only can pop out from the top of the Deck 
+ *  	4) eject(): only can pop out from the top of the DECK 
  *		    (pop from the bottom is not allowed) 
  *
- *	5) inject(): push a card at the bottom of the Deck
+ *	5) inject(): push a card at the bottom of the DECK
  *
  *	6) shuffle(-): use srand/rand
  */
 
 /* function to complete */
-Card* newcard(int _pips,char _suit){
-	Card* card = (Card*)malloc(sizeof(Card));
+CARD* newcard(int _pips,char _suit){
+	CARD* card = (CARD*)malloc(sizeof(CARD));
 	card->pips = _pips;
 	card->suit = _suit;
 	card->flipped = 0;
@@ -28,12 +28,12 @@ Card* newcard(int _pips,char _suit){
 	return card;	
 }
 	
-Deck* newdeck(){
-	Deck* deck = (Deck*)malloc(sizeof(Deck));
+DECK* newdeck(){
+	DECK* deck = (DECK*)malloc(sizeof(DECK));
 	deck->top=NULL;
 	deck->size=0;
 
-	Card* cursor;	
+	CARD* cursor;	
 	for(char s = 0; s <= 3; s++) {
 		for(int p = 2; p <= 14; p++) {
 			if(deck->top == NULL) { 
@@ -48,8 +48,8 @@ Deck* newdeck(){
 	return deck;
 }
 
-Player* newplayer(char* _name,int _account){
-	Player* player = (Player*)malloc(sizeof(Player));
+PLAYER* newplayer(char* _name,int _account){
+	PLAYER* player = (PLAYER*)malloc(sizeof(PLAYER));
 	player->name = _name;
 	player->c1 = NULL;
 	player->c2 = NULL;
@@ -57,8 +57,8 @@ Player* newplayer(char* _name,int _account){
 	return player;
 }
 
-Card* eject(Deck* deck) {
-	Card* temp = deck->top;
+CARD* eject(DECK* deck) {
+	CARD* temp = deck->top;
 	if(deck->top == NULL){
 		printf("error failed!\n");
 		return temp;
@@ -68,10 +68,10 @@ Card* eject(Deck* deck) {
 	return temp;
 }
 
-void shuffle(Deck* deck){
-	Deck* head = (Deck*)malloc(sizeof(Deck));	/* 분리하는 섞음 카드 뭉치를 임시 저장하는 공간이다. */
-	Deck* mid = (Deck*)malloc(sizeof(Deck));
-	Deck* tail = (Deck*)malloc(sizeof(Deck));
+void shuffle(DECK* deck){
+	DECK* head = (DECK*)malloc(sizeof(DECK));	/* 분리하는 섞음 카드 뭉치를 임시 저장하는 공간이다. */
+	DECK* mid = (DECK*)malloc(sizeof(DECK));
+	DECK* tail = (DECK*)malloc(sizeof(DECK));
 
 	srand(clock()); 	/* time(NULL) 보다 훨씬 빠른 주기로 시드를 변경한다. 프로그램이 실행된 이후 얼만큼의 cpu clock tick이 경과했는지 측정한다. */
 	
@@ -79,7 +79,7 @@ void shuffle(Deck* deck){
 	unsigned char index = rand()%(deck->size-20)+10;
 	unsigned char endex = rand()%(deck->size - index-1)+1;
 	
-	Card *cindex, *cendex, *aendex, *bendex;
+	CARD *cindex, *cendex, *aendex, *bendex;
 	cendex = deck->top;
 	for(int i = 0; i < index-1; i++) {
 		cendex = cendex->next;
@@ -121,6 +121,6 @@ void shuffle(Deck* deck){
 	return;
 }
 
-void freedeck(Deck* deck){  	/* malloc을 해줬던 메모리 영역들에 대하여 free()를 하지 않으면 메모리 문제가 발생하여 런타임 에러가 날 수 있다. */
+void freedeck(DECK* deck){  	/* malloc을 해줬던 메모리 영역들에 대하여 free()를 하지 않으면 메모리 문제가 발생하여 런타임 에러가 날 수 있다. */
 	return;
 }

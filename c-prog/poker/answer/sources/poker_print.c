@@ -1,6 +1,6 @@
 #include "../headers/poker.h"
 
-void print_card(Card* _card)
+void print_card(CARD* _card)
 {
 	if(_card->flipped == 0) {
 		printf(
@@ -70,8 +70,8 @@ void print_card(Card* _card)
 	return;
 }
 
-void print_deck(Deck* deck) {
-	Card* cursor = deck->top;
+void print_deck(DECK* deck) {
+	CARD* cursor = deck->top;
 	for(int i = 0; i < deck->size; i++){
 		print_card(cursor);
 		cursor = cursor->next;
@@ -79,11 +79,11 @@ void print_deck(Deck* deck) {
 	return;
 }
 
-void print_score(Player* player, Card* card[5]){
+void print_score(PLAYER* player, CARD* card[5]){
 	
 	int score = 0, pair1 = 0, pair2 = 0;
 
-	Card* cards[7];
+	CARD* cards[7];
 	cards[0] = player->c1;
 	cards[1] = player->c2;
 	cards[2] = card[0];

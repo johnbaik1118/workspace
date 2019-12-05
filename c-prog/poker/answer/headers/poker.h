@@ -30,19 +30,19 @@
  *	Define "typedef struct" of card, deck, and player 
  *	and Appropriate "Data Structure" (just one of stack, queue, linked list)
  *
- *  Card has 
+ *  CARD has 
  *	1) integer of pips 
  *	2) character of suit 
  *	3) bool of flipped or not
  * 	4) pointer which points next card
  *
- *  Deck has
+ *  DECK has
  * 	1) pointer of top card
  * 	2) size indicates how many cards are inside the deck
  * 	
- *  Player has
+ *  PLAYER has
  *	1) string name
- *	2) pointer of a Deck
+ *	2) pointer of a DECK
  *	3) int account
  *
  *  Functions to create
@@ -53,10 +53,10 @@
  *	
  * 	3) newplayer(): Use malloc
  *
- *  	4) eject(): only can pop out from the top of the Deck 
+ *  	4) eject(): only can pop out from the top of the DECK 
  *		    (pop from the bottom is not allowed) 
  *
- *	5) inject(): push a card at the bottom of the Deck
+ *	5) inject(): push a card at the bottom of the DECK
  *
  *	6) shuffle(-): use srand/rand
  */
@@ -67,33 +67,33 @@ typedef struct Card{
 	_Bool flipped;		// 1 Bytes
 	int pips; 		// 4 Bytes
 	struct Card *next;	// (In 64-bit) 8 Bytes
-}Card;
+}CARD;
 
 typedef struct Deck{
-	Card *top;
+	CARD *top;
 	int size;
-}Deck;
+}DECK;
 
-typedef struct Player {
+typedef struct PLAYER {
 	char* name;
-	Card* c1;
-	Card* c2;
+	CARD* c1;
+	CARD* c2;
 	int account;
-}Player;
+}PLAYER;
 
 /* function to complete -----> work in ../sources/poker_comp.c */
-Card* newcard(int,char);
-Deck* newdeck();
-Player* newplayer(char*,int);
-Card* eject(Deck*);
-void inject(Deck*,Card*);
-void shuffle(Deck*);
+CARD* newcard(int,char);
+DECK* newdeck();
+PLAYER* newplayer(char*,int);
+CARD* eject(DECK*);
+void inject(DECK*,CARD*);
+void shuffle(DECK*);
 
 /* print functions */
-void print_card(Card*);
-void print_deck(Deck*);
+void print_card(CARD*);
+void print_deck(DECK*);
 void print_game();
 
 /* Calculation of scores */
-void print_score(Player*, Card*[5]);
+void print_score(PLAYER*, CARD*[5]);
 
