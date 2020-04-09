@@ -1,6 +1,6 @@
-CC=arm-linux-gnueabihf-gcc
+CC=gcc
 
-make: client server
+make:
 	$(CC) -o client UDPEchoClient.c DieWithMessage.c AddressUtility.c
 	$(CC) -o server UDPEchoServer.c DieWithMessage.c AddressUtility.c
 
