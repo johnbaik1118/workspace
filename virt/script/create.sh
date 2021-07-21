@@ -1,7 +1,7 @@
 sudo virt-install \
---name vmone \
+--name vmtwo \
 --ram 2048 \
---disk path=/home/jeanseong/nfs-migration/images/vmone.qcow2,size=20 \
+--disk path=/home/dsc/virt-images/vmtwo.qcow2,size=50 \
 --vcpus 4 \
 --os-type linux \
---location 'http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/' 
+--location 'http://archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/' 
